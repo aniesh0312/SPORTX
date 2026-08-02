@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My orders | SPORTX{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="orders-section">
+    <div class="container">
+        <div class="orders-heading">
+            <div>
+                <p class="eyebrow">ORDER HISTORY</p>
+                <h1>My orders</h1>
+            </div>
+            <a href="{% url 'products' %}" class="btn btn-dark">Continue shopping</a>
+        </div>
+
+        {% if orders %}
+            <div class="orders-list">
+                {% for order in orders %}
+                    <article class="order-card">
+                        <div class="order-card-header">
+                            <div>
+                                <span class="order-label">ORDER</span>
+                                <h2>#SPX-{{ order.id }}</h2>
+                            </div>
+                            <div class="order-meta">
+                                <span>{{ order.order_date|date:"d M Y" }}</span>
+                                <span class="status-pill">{{ order.status }}</span>
+                            </div>
+                        </div>
+
+                        <div class="ordered-products">
+                            {% for item in order.items.all %}
+                                <div class="ordered-product">
+                                    {% if item.product.image %}
+                                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                    {% endif %}
+                                    <div>
+                                        <h3>{{ item.product.name }}</h3>
+                                        <p>{{ item.product.brand }} · Quantity {{ item.quantity }}</p>
+                                    </div>
+                                    <strong>₹{{ item.price }}</strong>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="order-card-footer">
+                            <span>{{ order.get_payment_method_display }}</span>
+                            <strong>Total: ₹{{ order.total_amount }}</strong>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-orders">
+                <i class="bi bi-bag"></i>
+                <h2>No orders yet</h2>
+                <p>Your completed orders will appear here.</p>
+                <a href="{% url 'products' %}" class="btn btn-warning">Start shopping</a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,175 @@
+.custom-navbar{
+
+    background:white;
+
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+
+    padding:18px 0;
+
+}
+
+.logo{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    color:#111 !important;
+
+}
+
+.logo span{
+
+    color:#FFC107;
+
+}
+
+.nav-link{
+
+    color:#333 !important;
+
+    font-weight:500;
+
+    margin:0 12px;
+
+    transition:.3s;
+
+}
+
+.nav-link:hover{
+
+    color:#FFC107 !important;
+
+}
+
+.nav-link.active{
+
+    color:#FFC107 !important;
+
+}
+
+.search-box{
+
+    display:flex;
+
+    border:1px solid #ddd;
+
+    border-radius:50px;
+
+    overflow:hidden;
+
+    height:42px;
+
+}
+
+.search-box input{
+
+    border:none;
+
+    outline:none;
+
+    padding:0 15px;
+
+    width:170px;
+
+}
+
+.search-box button{
+
+    border:none;
+
+    background:#FFC107;
+
+    width:50px;
+
+}
+
+.nav-icons{
+
+    gap:18px;
+
+}
+
+.icon{
+
+    color:#222;
+
+    font-size:1.35rem;
+
+    transition:.3s;
+
+    position:relative;
+
+}
+
+.icon:hover{
+
+    color:#FFC107;
+
+}
+
+.badge-cart{
+
+    position:absolute;
+
+    top:-8px;
+
+    right:-10px;
+
+    width:18px;
+
+    height:18px;
+
+    background:#111;
+
+    color:white;
+
+    border-radius:50%;
+
+    font-size:10px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.navbar-toggler{
+
+    border:none;
+
+    font-size:1.8rem;
+
+}
+
+.navbar-toggler:focus{
+
+    box-shadow:none;
+
+}
+
+@media(max-width:992px){
+
+.search-box{
+
+    margin:20px 0;
+
+    width:100%;
+
+}
+
+.search-box input{
+
+    width:100%;
+
+}
+
+.nav-icons{
+
+    margin-top:20px;
+
+}
+
+}

@@ -1,0 +1,398 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Products | SPORTX{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/products.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="shop-header">
+    <div class="container">
+        <p class="shop-header-kicker">SPORTX COLLECTION</p>
+        <h1>Shop All Products</h1>
+        <p>Discover premium sportswear and accessories built for every move.</p>
+    </div>
+</section>
+
+<section class="products-section py-5">
+    <div class="container">
+
+        <button
+            class="btn filter-toggle d-lg-none w-100 mb-3"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#productFilters"
+            aria-expanded="false"
+            aria-controls="productFilters">
+            <i class="bi bi-sliders me-2"></i>Show filters
+        </button>
+
+        <div class="row g-4 align-items-start">
+
+            <aside class="col-lg-3">
+                <div class="filter-sidebar collapse d-lg-block" id="productFilters">
+
+                    <div class="filter-sidebar-header">
+                        <h2>
+                            <i class="bi bi-sliders2-vertical"></i>
+                            Filters
+                        </h2>
+
+                        <a href="{% url 'products' %}" class="clear-filters">
+                            Clear all
+                        </a>
+                    </div>
+
+                    <form method="get" action="{% url 'products' %}" class="filter-form">
+
+                        {% if search %}
+                            <input type="hidden" name="search" value="{{ search }}">
+                        {% endif %}
+
+                        <div class="filter-group">
+                            <h3>Categories</h3>
+
+                            <label class="filter-option">
+                                <input
+                                    type="radio"
+                                    name="category"
+                                    value=""
+                                    {% if not selected_category %}checked{% endif %}>
+                                <span>All categories</span>
+                            </label>
+
+                            {% for category in categories %}
+                                <label class="filter-option">
+                                    <input
+                                        type="radio"
+                                        name="category"
+                                        value="{{ category.id }}"
+                                        {% if selected_category == category.id|stringformat:'s' %}checked{% endif %}>
+                                    <span>{{ category.name }}</span>
+                                </label>
+                            {% endfor %}
+                        </div>
+
+                        <div class="filter-group">
+                            <h3>Brands</h3>
+
+                            <label class="filter-option">
+                                <input
+                                    type="radio"
+                                    name="brand"
+                                    value=""
+                                    {% if not selected_brand %}checked{% endif %}>
+                                <span>All brands</span>
+                            </label>
+
+                            {% for brand in brands %}
+                                <label class="filter-option">
+                                    <input
+                                        type="radio"
+                                        name="brand"
+                                        value="{{ brand }}"
+                                        {% if selected_brand == brand %}checked{% endif %}>
+                                    <span>{{ brand }}</span>
+                                </label>
+                            {% endfor %}
+                        </div>
+
+                        <div class="filter-group">
+                            <h3>Price range</h3>
+
+                            <div class="price-inputs">
+                                <div>
+                                    <label for="min-price">Min</label>
+
+                                    <div class="price-field">
+                                        <span>₹</span>
+
+                                        <input
+                                            id="min-price"
+                                            type="number"
+                                            name="min_price"
+                                            min="0"
+                                            step="1"
+                                            value="{{ min_price }}"
+                                            placeholder="0">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="max-price">Max</label>
+
+                                    <div class="price-field">
+                                        <span>₹</span>
+
+                                        <input
+                                            id="max-price"
+                                            type="number"
+                                            name="max_price"
+                                            min="0"
+                                            step="1"
+                                            value="{{ max_price }}"
+                                            placeholder="Any">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filter-group filter-group-last">
+                            <h3>Sort by</h3>
+
+                            <select name="sort" class="form-select">
+                                <option value="newest" {% if sort == 'newest' %}selected{% endif %}>
+                                    Newest
+                                </option>
+
+                                <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>
+                                    Price: Low to High
+                                </option>
+
+                                <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>
+                                    Price: High to Low
+                                </option>
+
+                                <option value="name_asc" {% if sort == 'name_asc' %}selected{% endif %}>
+                                    Name: A to Z
+                                </option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn apply-filters w-100">
+                            Apply filters
+                        </button>
+
+                    </form>
+                </div>
+            </aside>
+
+            <div class="col-lg-9">
+
+                <div class="products-toolbar">
+                    <div>
+                        <p class="toolbar-label">PRODUCTS</p>
+
+                        <h2>
+                            {{ product_count }} Product{{ product_count|pluralize }} Found
+                        </h2>
+                    </div>
+
+                    {% if search or selected_category or selected_brand or min_price or max_price %}
+                        <a href="{% url 'products' %}" class="toolbar-reset">
+                            <i class="bi bi-arrow-counterclockwise"></i>
+                            Reset
+                        </a>
+                    {% endif %}
+                </div>
+
+                {% if search or selected_category or selected_brand or min_price or max_price %}
+                    <div class="active-filters" aria-label="Active filters">
+
+                        <span class="active-filters-title">Active:</span>
+
+                        {% if search %}
+                            <span class="filter-chip">
+                                Search: “{{ search }}”
+                            </span>
+                        {% endif %}
+
+                        {% if selected_category_name %}
+                            <span class="filter-chip">
+                                {{ selected_category_name }}
+                            </span>
+                        {% endif %}
+
+                        {% if selected_brand %}
+                            <span class="filter-chip">
+                                {{ selected_brand }}
+                            </span>
+                        {% endif %}
+
+                        {% if min_price %}
+                            <span class="filter-chip">
+                                From ₹{{ min_price }}
+                            </span>
+                        {% endif %}
+
+                        {% if max_price %}
+                            <span class="filter-chip">
+                                Up to ₹{{ max_price }}
+                            </span>
+                        {% endif %}
+
+                    </div>
+                {% endif %}
+
+                {% if products %}
+                    <div class="row g-4">
+
+                        {% for product in products %}
+                            <div class="col-xl-4 col-md-6">
+
+                                <article class="product-card">
+
+                     <div class="product-card">
+
+    {% if product.is_featured %}
+    <span class="featured-badge">
+        Featured
+    </span>
+    {% endif %}
+
+    <div class="product-image">
+
+        <img src="{{ product.image.url }}"
+             alt="{{ product.name }}">
+
+        <div class="product-overlay">
+
+            <a href="{% url 'product_detail' product.id %}"
+               class="quick-view">
+
+                <i class="bi bi-eye"></i>
+
+            </a>
+
+            <a href="{% url 'add_to_wishlist' product.id %}"
+               class="wishlist-btn">
+
+                <i class="bi bi-heart"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="product-info">
+
+        <small class="brand-name">
+
+            {{ product.brand }}
+
+        </small>
+
+        <h5>
+
+            {{ product.name }}
+
+        </h5>
+
+        <div class="rating-stars">
+
+            ★★★★★
+
+            <span>
+
+                ({{ product.rating }})
+
+            </span>
+
+        </div>
+
+        <h4>
+
+            ₹{{ product.price }}
+
+        </h4>
+
+        {% if product.stock > 5 %}
+
+        <span class="stock in-stock">
+
+            <i class="bi bi-check-circle-fill"></i>
+
+            In Stock
+
+        </span>
+
+        {% elif product.stock > 0 %}
+
+        <span class="stock low-stock">
+
+            <i class="bi bi-exclamation-circle-fill"></i>
+
+            Only {{ product.stock }} Left
+
+        </span>
+
+        {% else %}
+
+        <span class="stock out-stock">
+
+            <i class="bi bi-x-circle-fill"></i>
+
+            Out of Stock
+
+        </span>
+
+        {% endif %}
+
+        <div class="product-buttons">
+
+            <a href="{% url 'product_detail' product.id %}"
+               class="btn btn-dark">
+
+                Details
+
+            </a>
+
+            {% if product.stock > 0 %}
+
+            <a href="{% url 'add_to_cart' product.id %}"
+               class="btn btn-warning">
+
+                <i class="bi bi-cart-plus"></i>
+
+            </a>
+
+            {% else %}
+
+            <button class="btn btn-secondary" disabled>
+
+                <i class="bi bi-x-circle"></i>
+
+            </button>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+                                </article>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+
+                {% else %}
+                    <div class="empty-products">
+
+                        <div class="empty-products-icon">
+                            <i class="bi bi-search"></i>
+                        </div>
+
+                        <h2>No products found</h2>
+
+                        <p>
+                            Try changing your filters or searching for something else.
+                        </p>
+
+                        <a href="{% url 'products' %}" class="btn view-all-products">
+                            View all products
+                        </a>
+
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

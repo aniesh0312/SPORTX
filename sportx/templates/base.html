@@ -1,0 +1,123 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}SPORTX{% endblock %}</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Toastify CSS -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+
+    {% block extra_css %}
+    {% endblock %}
+
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    {% include "navbar.html" %}
+
+    <!-- Main Content -->
+
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+    <!-- Footer -->
+
+    {% include "footer.html" %}
+
+    <!-- Bootstrap JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Toastify -->
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    {% if messages %}
+
+    <script>
+
+    document.addEventListener("DOMContentLoaded", function(){
+
+        {% for message in messages %}
+
+        Toastify({
+
+            text: "{{ message|escapejs }}",
+
+            duration: 3500,
+
+            gravity: "top",
+
+            position: "right",
+
+            close: true,
+
+            stopOnFocus: true,
+
+            offset: {
+
+                x: 20,
+
+                y: 20
+
+            },
+
+            style: {
+
+                background:
+                "{% if message.tags == 'success' %}linear-gradient(to right,#28a745,#20c997){% elif message.tags == 'error' %}linear-gradient(to right,#dc3545,#ff4d4d){% elif message.tags == 'warning' %}linear-gradient(to right,#ffc107,#ff9800){% else %}linear-gradient(to right,#343a40,#6c757d){% endif %}"
+
+            }
+
+        }).showToast();
+
+        {% endfor %}
+
+    });
+
+    </script>
+
+    {% endif %}
+
+    <!-- Main JS -->
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+    {% block extra_js %}
+    {% endblock %}
+
+</body>
+
+</html>

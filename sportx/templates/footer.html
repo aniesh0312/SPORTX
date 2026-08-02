@@ -1,0 +1,134 @@
+{% load static %}
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="row gy-5">
+
+            <!-- Brand -->
+
+            <div class="col-lg-4">
+
+                <a href="{% url 'index' %}" class="footer-logo">
+
+                    SPORT<span>X</span>
+
+                </a>
+
+                <p class="footer-text">
+
+                    Elevate your performance with premium sportswear,
+                    footwear and accessories designed for champions.
+
+                </p>
+
+                <div class="footer-contact">
+
+                    <p><i class="bi bi-geo-alt-fill"></i> VIT, Vellore, Tamil Nadu</p>
+
+                    <p><i class="bi bi-envelope-fill"></i> support@sportx.com</p>
+
+                    <p><i class="bi bi-telephone-fill"></i> +91 98765 43210</p>
+
+                </div>
+
+            </div>
+
+            <!-- Quick Links -->
+
+            <div class="col-lg-2 col-md-6">
+
+                <h5>Quick Links</h5>
+
+                <ul>
+
+                    <li><a href="{% url 'index' %}">Home</a></li>
+
+                    <li><a href="{% url 'products' %}">Products</a></li>
+
+                    <li><a href="{% url 'about' %}">About</a></li>
+
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+
+                </ul>
+
+            </div>
+
+            <!-- Customer -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <h5>Customer</h5>
+
+                <ul>
+
+                    <li><a href="{% url 'wishlist' %}">Wishlist</a></li>
+
+                    <li><a href="{% url 'cart' %}">Cart</a></li>
+
+                    <li><a href="{% url 'my_orders' %}">My Orders</a></li>
+
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'profile' %}">My Profile</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+
+                </ul>
+
+            </div>
+
+            <!-- Social -->
+
+            <div class="col-lg-3">
+
+                <h5>Follow Us</h5>
+
+                <div class="social-icons">
+
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+
+                    <a href="#"><i class="bi bi-linkedin"></i></a>
+
+                    <a href="#"><i class="bi bi-github"></i></a>
+
+                </div>
+
+                <div class="payment-icons">
+
+                    <span><i class="bi bi-credit-card"></i> Visa</span>
+
+                    <span><i class="bi bi-credit-card-2-front"></i> Mastercard</span>
+
+                    <span><i class="bi bi-phone"></i> UPI</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="footer-bottom">
+
+            <p>
+
+                © 2026 <strong>SPORTX</strong>. All Rights Reserved.
+
+            </p>
+
+            <a href="#" class="back-top">
+
+                <i class="bi bi-arrow-up-circle-fill"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>

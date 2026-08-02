@@ -1,0 +1,325 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Order Successful - SPORTX</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+
+        body{
+            background-color: #f8f9fa;
+        }
+
+        /* Success Box */
+
+        .success-box{
+            background-color: white;
+
+            padding: 60px;
+
+            border-radius: 20px;
+
+            text-align: center;
+
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .success-icon{
+            font-size: 100px;
+            color: green;
+        }
+
+        .order-id{
+            background-color: #f8f9fa;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            font-weight: bold;
+        }
+
+        .btn-home{
+            background-color: black;
+            color: white;
+
+            transition: 0.3s;
+        }
+
+        .btn-home:hover{
+            background-color: orange;
+            color: black;
+        }
+
+        .btn-orders{
+            background-color: orange;
+            color: black;
+
+            transition: 0.3s;
+        }
+
+        .btn-orders:hover{
+            background-color: black;
+            color: white;
+        }
+
+        /* Order Summary */
+
+        .summary-box{
+            background-color: white;
+
+            padding: 30px;
+
+            border-radius: 15px;
+
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .summary-product img{
+            width: 90px;
+            height: 90px;
+
+            object-fit: cover;
+
+            border-radius: 10px;
+        }
+
+        .price{
+            color: orange;
+
+            font-weight: bold;
+        }
+
+        /* Footer */
+
+        footer{
+            background-color: black;
+        }
+
+        .social-icons i{
+            font-size: 25px;
+            transition: 0.3s;
+        }
+
+        .social-icons i:hover{
+            color: orange;
+            transform: translateY(-5px);
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+   
+    <!-- Success Section -->
+
+    <section class="py-5">
+
+        <div class="container">
+
+            <div class="success-box">
+
+                <div class="success-icon mb-4">
+
+                    <i class="bi bi-check-circle-fill"></i>
+
+                </div>
+
+                <h1 class="fw-bold mb-3">
+
+                    Order Placed Successfully!
+
+                </h1>
+
+                <p class="lead mb-4">
+
+                    Thank you for shopping with SPORTX.
+                    Your order has been successfully placed.
+
+                </p>
+
+                <!-- Order ID -->
+
+                <div class="order-id mb-5">
+
+                    Order ID : #SPX458721
+
+                </div>
+
+                <!-- Buttons -->
+
+                <div>
+
+                    <a href="{% url 'products' %}"
+                    class="btn btn-home px-5 py-3 me-3">
+
+                    Continue Shopping
+
+                    </a>
+
+                    <button class="btn btn-orders px-5 py-3">
+
+                        View Orders
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Order Summary -->
+
+    <section class="pb-5">
+
+        <div class="container">
+
+            <div class="summary-box">
+
+                <h3 class="fw-bold mb-4">
+
+                    Order Summary
+
+                </h3>
+
+                <!-- Product -->
+
+                <div class="d-flex align-items-center mb-4 summary-product">
+
+                    <img src="{% static 'images/product1.png' %}" alt="">
+
+                    <div class="ms-3">
+
+                        <h5>
+
+                            Dry Fit T-Shirt
+
+                        </h5>
+
+                        <p>
+
+                            Quantity : 1
+
+                        </p>
+
+                        <h6 class="price">
+
+                            ₹1499
+
+                        </h6>
+
+                    </div>
+
+                </div>
+
+                <!-- Product -->
+
+                <div class="d-flex align-items-center mb-4 summary-product">
+
+                    <img src="{% static 'images/shoes.png' %}" alt="">
+
+                    <div class="ms-3">
+
+                        <h5>
+
+                            Running Shoes
+
+                        </h5>
+
+                        <p>
+
+                            Quantity : 1
+
+                        </p>
+
+                        <h6 class="price">
+
+                            ₹2999
+
+                        </h6>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <!-- Payment Details -->
+
+                <div class="d-flex justify-content-between mb-3">
+
+                    <h5>
+
+                        Payment Method
+
+                    </h5>
+
+                    <h5>
+
+                        Cash On Delivery
+
+                    </h5>
+
+                </div>
+
+                <div class="d-flex justify-content-between mb-3">
+
+                    <h5>
+
+                        Shipping Address
+
+                    </h5>
+
+                    <h5>
+
+                        Chennai, India
+
+                    </h5>
+
+                </div>
+
+                <div class="d-flex justify-content-between">
+
+                    <h4 class="fw-bold">
+
+                        Total Amount
+
+                    </h4>
+
+                    <h4 class="price">
+
+                        ₹4397
+
+                    </h4>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+   
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+{% endblock %}

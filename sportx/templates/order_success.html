@@ -1,0 +1,41 @@
+```html
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Order successful | SPORTX{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="success-section">
+    <div class="container">
+        <div class="success-card">
+            <div class="success-icon"><i class="bi bi-check-lg"></i></div>
+            <p class="eyebrow">ORDER CONFIRMED</p>
+            <h1>Thank you, {{ order.customer_name }}.</h1>
+            <p class="success-copy">Your SPORTX order has been placed successfully. We will contact you with delivery updates.</p>
+            <p class="order-number">Order number <strong>#SPX-{{ order.id }}</strong></p>
+
+            <div class="success-details">
+                <div><span>Order date</span><strong>{{ order.order_date|date:"d M Y" }}</strong></div>
+                <div><span>Payment</span><strong>{{ order.get_payment_method_display }}</strong></div>
+                <div><span>Total</span><strong>₹{{ order.total_amount }}</strong></div>
+                <div><span>Status</span><strong class="status-pill">{{ order.status }}</strong></div>
+            </div>
+
+            <div class="order-items-mini">
+                {% for item in order.items.all %}
+                    <div><span>{{ item.product.name }} × {{ item.quantity }}</span><strong>₹{{ item.price }}</strong></div>
+                {% endfor %}
+            </div>
+
+            <div class="success-actions">
+                <a href="{% url 'products' %}" class="btn btn-dark px-4 py-3">Continue shopping</a>
+                <a href="{% url 'my_orders' %}" class="btn btn-outline-dark px-4 py-3">View my orders</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,478 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="product-section">
+
+<div class="container">
+
+<div class="row align-items-center">
+
+<div class="col-lg-6">
+
+<div class="product-image">
+
+<img src="{{ product.image.url }}" alt="{{ product.name }}">
+
+</div>
+
+</div>
+
+<div class="col-lg-6 product-info">
+
+<h1>{{ product.name }}</h1>
+
+<p class="brand">
+Brand : {{ product.brand }}
+</p>
+
+<div class="rating">
+★★★★★ ({{ product.rating }})
+</div>
+
+<div class="price">
+₹{{ product.price }}
+</div>
+
+<p class="description">
+{{ product.description }}
+</p>
+
+{% if product.stock > 5 %}
+
+<p class="stock text-success">
+
+<i class="bi bi-check-circle-fill"></i>
+
+In Stock
+
+<span class="badge bg-success">
+
+{{ product.stock }} Available
+
+</span>
+
+</p>
+
+{% elif product.stock > 0 %}
+
+<p class="stock text-warning">
+
+<i class="bi bi-exclamation-circle-fill"></i>
+
+Hurry!
+
+<span class="badge bg-warning text-dark">
+
+Only {{ product.stock }} Left
+
+</span>
+
+</p>
+
+{% else %}
+
+<p class="stock text-danger">
+
+<i class="bi bi-x-circle-fill"></i>
+
+Out Of Stock
+
+</p>
+
+{% endif %}
+
+<div class="action-buttons">
+
+{% if product.stock > 0 %}
+
+<a href="{% url 'add_to_cart' product.id %}"
+
+class="btn btn-warning btn-lg">
+
+<i class="bi bi-bag-plus"></i>
+
+Add to Cart
+
+</a>
+
+{% else %}
+
+<button
+
+class="btn btn-secondary btn-lg"
+
+disabled>
+
+Out Of Stock
+
+</button>
+
+{% endif %}
+
+<a href="{% url 'add_to_wishlist' product.id %}"
+   class="btn btn-outline-dark btn-lg">
+    ❤️ Wishlist
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<section class="product-reviews py-5">
+
+<div class="container">
+
+<div class="row g-4">
+
+    <!-- Left Rating Summary -->
+
+    <div class="col-lg-3">
+
+        <div class="review-summary-card">
+
+            <h3>Customer Reviews</h3>
+
+            <div class="average-rating">
+
+                {{ average_rating|floatformat:1 }}
+
+            </div>
+
+            <div class="stars mb-2">
+
+                {% for i in "12345" %}
+
+                    {% if forloop.counter <= average_rating %}
+
+                        <i class="bi bi-star-fill"></i>
+
+                    {% else %}
+
+                        <i class="bi bi-star"></i>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+
+            <p class="text-muted">
+
+                Based on {{ review_count }} Review{{ review_count|pluralize }}
+
+            </p>
+
+            <hr>
+
+            <div class="review-info">
+
+                <p>
+
+                    <i class="bi bi-patch-check-fill text-success"></i>
+
+                    Verified Buyer Reviews
+
+                </p>
+
+                <p>
+
+                    Honest feedback from SPORTX customers.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Review List -->
+
+    <div class="col-lg-5">
+
+        <div class="review-list-card">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <h3>
+
+                    Customer Feedback
+
+                </h3>
+
+                <span class="badge bg-dark">
+
+                    {{ review_count }}
+
+                </span>
+
+            </div>
+
+            {% for review in reviews %}
+
+            <div class="review-item">
+
+                <div class="d-flex justify-content-between">
+
+                    <div>
+
+                        <strong>
+
+                            {{ review.user.username }}
+
+                        </strong>
+
+                        <span class="verified">
+
+                            <i class="bi bi-patch-check-fill"></i>
+
+                            Verified Buyer
+
+                        </span>
+
+                    </div>
+
+                    <small class="text-muted">
+
+                        {{ review.created_at|date:"d M Y" }}
+
+                    </small>
+
+                </div>
+
+                <div class="stars my-2">
+
+                    {% for i in "12345" %}
+
+                        {% if forloop.counter <= review.rating %}
+
+                            <i class="bi bi-star-fill"></i>
+
+                        {% else %}
+
+                            <i class="bi bi-star"></i>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div>
+
+                <h5>
+
+                    {{ review.title }}
+
+                </h5>
+
+                <p>
+
+                    {{ review.comment }}
+
+                </p>
+
+            </div>
+
+            {% empty %}
+
+            <div class="empty-review">
+
+                <i class="bi bi-chat-square-text"></i>
+
+                <h5>No Reviews Yet</h5>
+
+                <p>
+
+                    Be the first person to review this product.
+
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <!-- Write Review -->
+
+    <div class="col-lg-4">
+
+        <div class="review-form-card">
+
+            {% if user.is_authenticated %}
+
+            <h3 class="mb-4">
+
+                {% if user_review %}
+
+                Update Review
+
+                {% else %}
+
+                Write a Review
+
+                {% endif %}
+
+            </h3>
+
+            <form method="POST"
+
+                  action="{% url 'submit_review' product.id %}">
+
+                {% csrf_token %}
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Rating
+
+                    </label>
+
+                    {{ review_form.rating }}
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Review Title
+
+                    </label>
+
+                    {{ review_form.title }}
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Your Experience
+
+                    </label>
+
+                    {{ review_form.comment }}
+
+                </div>
+
+                <button
+
+                    class="btn btn-warning w-100 py-2">
+
+                    {% if user_review %}
+
+                    Update Review
+
+                    {% else %}
+
+                    Submit Review
+
+                    {% endif %}
+
+                </button>
+
+            </form>
+
+            {% else %}
+
+            <div class="login-review">
+
+                <i class="bi bi-person-circle"></i>
+
+                <h4>
+
+                    Want to review?
+
+                </h4>
+
+                <p>
+
+                    Login to share your experience.
+
+                </p>
+
+                <a href="{% url 'login' %}"
+
+                   class="btn btn-warning">
+
+                    Login
+
+                </a>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+<section class="container">
+
+<h2 class="related-title">
+Related Products
+</h2>
+
+<div class="row g-4">
+
+{% for item in related_products %}
+
+<div class="col-lg-3 col-md-6">
+
+<div class="related-card">
+
+<div class="product-image">
+
+<img src="{{ item.image.url }}" alt="{{ item.name }}">
+
+</div>
+
+<div class="product-info">
+
+<h5>{{ item.name }}</h5>
+
+<p>{{ item.brand }}</p>
+
+<h4>₹{{ item.price }}</h4>
+
+<a href="{% url 'product_detail' item.id %}"
+class="btn btn-warning w-100">
+
+View Product
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</section>
+
+{% endblock %}

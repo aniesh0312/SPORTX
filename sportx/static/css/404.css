@@ -1,0 +1,135 @@
+.error-page{
+
+    min-height:85vh;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#f8f9fa;
+
+}
+
+.error-box{
+
+    text-align:center;
+
+    background:white;
+
+    padding:70px;
+
+    border-radius:25px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+
+    max-width:700px;
+
+    margin:auto;
+
+}
+
+.error-icon{
+
+    width:100px;
+
+    height:100px;
+
+    margin:auto;
+
+    background:#FFC107;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:45px;
+
+    color:#111;
+
+    margin-bottom:25px;
+
+}
+
+.error-box h1{
+
+    font-size:7rem;
+
+    font-weight:700;
+
+    color:#111;
+
+    margin-bottom:10px;
+
+}
+
+.error-box h2{
+
+    font-weight:700;
+
+    margin-bottom:20px;
+
+}
+
+.error-box p{
+
+    color:#666;
+
+    line-height:1.8;
+
+    margin-bottom:35px;
+
+}
+
+.error-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.error-buttons .btn{
+
+    padding:14px 30px;
+
+    border-radius:50px;
+
+}
+
+@media(max-width:768px){
+
+.error-box{
+
+    padding:40px 25px;
+
+}
+
+.error-box h1{
+
+    font-size:5rem;
+
+}
+
+.error-buttons{
+
+    flex-direction:column;
+
+}
+
+.error-buttons .btn{
+
+    width:100%;
+
+}
+
+}

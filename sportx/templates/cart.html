@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Shopping Cart | SPORTX{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="cart-page">
+    <div class="container">
+
+        <div class="cart-heading">
+            <div>
+                <p class="cart-label">YOUR BAG</p>
+                <h1>Shopping Cart</h1>
+            </div>
+
+            <a href="{% url 'products' %}" class="continue-link">
+                <i class="bi bi-arrow-left"></i> Continue Shopping
+            </a>
+        </div>
+
+        {% if cart_items %}
+
+        <div class="row g-4">
+            <div class="col-lg-8">
+
+                <div class="cart-items-box">
+
+                    {% for item in cart_items %}
+                    <div class="cart-item">
+
+                        <a href="{% url 'product_detail' item.product.id %}" class="cart-image">
+                            {% if item.product.image %}
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                            {% endif %}
+                        </a>
+
+                        <div class="cart-product-info">
+                            <p class="cart-brand">{{ item.product.brand }}</p>
+
+                            <a href="{% url 'product_detail' item.product.id %}">
+                                <h5>{{ item.product.name }}</h5>
+                            </a>
+
+                            <p class="cart-price">₹{{ item.product.price }}</p>
+
+                            <p class="stock-text">
+                                {% if item.product.stock > 0 %}
+                                In stock: {{ item.product.stock }}
+                                {% else %}
+                                Out of stock
+                                {% endif %}
+                            </p>
+                        </div>
+
+                        <div class="cart-quantity">
+
+                            <form method="post" action="{% url 'update_cart' item.product.id %}">
+                                {% csrf_token %}
+                                <button type="submit" name="action" value="decrease" aria-label="Decrease quantity">
+                                    <i class="bi bi-dash"></i>
+                                </button>
+                            </form>
+
+                            <span>{{ item.quantity }}</span>
+
+                            <form method="post" action="{% url 'update_cart' item.product.id %}">
+                                {% csrf_token %}
+                                <button type="submit" name="action" value="increase"
+                                    aria-label="Increase quantity"
+                                    {% if item.quantity >= item.product.stock %}disabled{% endif %}>
+                                    <i class="bi bi-plus"></i>
+                                </button>
+                            </form>
+
+                        </div>
+
+                        <div class="cart-subtotal">
+                            <p>Subtotal</p>
+                            <h5>₹{{ item.subtotal|floatformat:2 }}</h5>
+                        </div>
+
+                        <form method="post" action="{% url 'remove_from_cart' item.product.id %}" class="remove-form">
+                            {% csrf_token %}
+                            <button type="submit" class="remove-btn" aria-label="Remove product">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </form>
+
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+                <aside class="order-summary">
+
+                    <h3>Order Summary</h3>
+
+                    <div class="summary-row">
+                        <span>Items ({{ cart_count }})</span>
+                        <span>₹{{ total|floatformat:2 }}</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Delivery</span>
+                        <span class="free-delivery">Free</span>
+                    </div>
+
+                    <hr>
+
+                    <div class="summary-total">
+                        <span>Total</span>
+                        <strong>₹{{ total|floatformat:2 }}</strong>
+                    </div>
+
+                    <a href="{% url 'checkout' %}" class="btn btn-dark w-100 py-3">
+    Proceed to checkout
+</a>
+
+                    <p class="secure-checkout">
+                        <i class="bi bi-shield-check"></i>
+                        Secure checkout
+                    </p>
+
+                </aside>
+            </div>
+        </div>
+
+        {% else %}
+
+        <div class="empty-cart">
+            <i class="bi bi-bag-x"></i>
+            <h2>Your cart is empty</h2>
+            <p>Explore SPORTX and find gear built for your next challenge.</p>
+            <a href="{% url 'products' %}" class="btn empty-shop-btn">
+                Start Shopping
+            </a>
+        </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

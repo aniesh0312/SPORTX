@@ -1,0 +1,280 @@
+@media(max-width:768px){
+
+.product-image{
+
+height:230px;
+
+}
+
+.product-image img{
+
+max-height:180px;
+
+}
+
+.product-info{
+
+padding:18px;
+
+}
+
+.product-info h5{
+
+font-size:18px;
+
+min-height:auto;
+
+}
+
+.product-info h4{
+
+font-size:22px;
+
+}
+
+}
+/* ===========================
+   TABLETS
+=========================== */
+
+@media (max-width:992px){
+
+.hero-content{
+
+    text-align:center;
+
+}
+
+.hero-content h1{
+
+    font-size:2.8rem;
+
+}
+
+.hero-image{
+
+    margin-top:40px;
+
+}
+
+.product-info{
+
+    text-align:center;
+
+}
+
+.action-buttons{
+
+    justify-content:center;
+
+}
+
+.contact-card{
+
+    margin-bottom:20px;
+
+}
+
+.footer{
+
+    text-align:center;
+
+}
+
+.footer-bottom{
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+.social-icons{
+
+    justify-content:center;
+
+}
+
+}
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+section{
+
+    padding:60px 0 !important;
+
+}
+
+h1{
+
+    font-size:2rem !important;
+
+}
+
+h2{
+
+    font-size:1.7rem !important;
+
+}
+
+.hero-content h1{
+
+    font-size:2.3rem !important;
+
+}
+
+.hero-content p{
+
+    font-size:16px;
+
+}
+
+.btn{
+
+    width:100%;
+
+}
+
+.action-buttons{
+
+    flex-direction:column;
+
+}
+
+.product-card{
+
+    margin-bottom:20px;
+
+}
+
+.review-summary{
+
+    flex-direction:column;
+
+}
+
+.review-form{
+
+    padding:25px;
+
+}
+
+.about-story{
+
+    text-align:center;
+
+}
+
+.about-story img{
+
+    margin-bottom:30px;
+
+}
+
+.hours-card{
+
+    margin-top:25px;
+
+}
+
+.search-box{
+
+    width:100%;
+
+}
+
+.search-box input{
+
+    width:100%;
+
+}
+
+.nav-icons{
+
+    justify-content:center;
+
+    margin-top:20px;
+
+}
+
+}
+
+
+/* ===========================
+   SMALL MOBILES
+=========================== */
+
+@media(max-width:576px){
+
+.hero-content{
+
+    padding-top:30px;
+
+}
+
+.hero-content h1{
+
+    font-size:1.9rem !important;
+
+}
+
+.hero-content p{
+
+    font-size:15px;
+
+}
+
+.shop-header{
+
+    padding:70px 0;
+
+}
+
+.shop-header h1{
+
+    font-size:2rem;
+
+}
+
+.product-image{
+
+    height:220px;
+
+}
+
+.product-image img{
+
+    max-height:180px;
+
+}
+
+.contact-form-box{
+
+    padding:25px;
+
+}
+
+.hours-card{
+
+    padding:25px;
+
+}
+
+.footer-logo{
+
+    font-size:1.8rem;
+
+}
+
+.footer{
+
+    padding:60px 0 20px;
+
+}
+
+}

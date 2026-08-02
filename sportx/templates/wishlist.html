@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}My Wishlist{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+<h2 class="mb-4">❤️ My Wishlist</h2>
+
+{% if products %}
+
+<div class="row">
+
+{% for product in products %}
+
+<div class="col-md-4 mb-4">
+
+<div class="card h-100">
+
+<img src="{{ product.image.url }}"
+class="card-img-top"
+style="height:250px;object-fit:contain;">
+
+<div class="card-body text-center">
+
+<h5>{{ product.name }}</h5>
+
+<p>{{ product.brand }}</p>
+
+<h4>₹{{ product.price }}</h4>
+
+<a href="{% url 'move_to_cart' product.id %}"
+class="btn btn-warning w-100 mb-2">
+
+🛒 Move to Cart
+
+</a>
+
+<a href="{% url 'remove_from_wishlist' product.id %}"
+class="btn btn-outline-danger w-100">
+
+Remove
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% else %}
+
+<div class="alert alert-info text-center">
+
+<h4>Your Wishlist is Empty ❤️</h4>
+
+<p>Add your favourite products to see them here.</p>
+
+<a href="{% url 'products' %}" class="btn btn-dark">
+Continue Shopping
+</a>
+
+</div>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,160 @@
+/* ===========================
+   SPORTX Global Styles
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f8f9fa;
+    color:#222;
+}
+
+a{
+    text-decoration:none;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+section{
+    padding:80px 0;
+}
+
+.container{
+    max-width:1250px;
+}
+
+.btn-warning{
+    background:#FFC107;
+    border:none;
+    color:#111;
+    font-weight:600;
+}
+
+.btn-warning:hover{
+    background:#e0aa00;
+}
+
+.title{
+    font-size:2.3rem;
+    font-weight:700;
+    text-align:center;
+    margin-bottom:50px;
+}
+
+/* ===========================
+   Toastify Styling
+=========================== */
+
+.toastify{
+
+    border-radius:14px !important;
+
+    padding:15px 18px !important;
+
+    font-family:'Poppins',sans-serif;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+
+}
+/* ===========================
+   GLOBAL PAGE ANIMATION
+=========================== */
+
+body{
+    animation:fadePage .6s ease;
+}
+
+@keyframes fadePage{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(10px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+/* ===========================
+   BUTTON ANIMATION
+=========================== */
+
+.btn{
+
+    transition:all .3s ease !important;
+
+}
+
+.btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 24px rgba(0,0,0,.15);
+
+}
+/* ===========================
+   CARD HOVER
+=========================== */
+
+.product-card,
+.featured-card,
+.contact-card,
+.mission-card,
+.value-card,
+.feature-box{
+
+    transition:all .35s ease;
+
+}
+
+.product-card:hover,
+.featured-card:hover,
+.contact-card:hover,
+.mission-card:hover,
+.value-card:hover,
+.feature-box:hover{
+
+    transform:translateY(-8px);
+
+}
+/* ===========================
+   IMAGE ANIMATION
+=========================== */
+
+img{
+
+    transition:transform .4s ease;
+
+}
+
+.product-image img:hover,
+.featured-image img:hover{
+
+    transform:scale(1.05);
+
+}
+html{
+
+    scroll-behavior:smooth;
+
+}

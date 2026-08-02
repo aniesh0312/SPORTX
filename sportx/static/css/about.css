@@ -1,0 +1,394 @@
+/* ===========================
+   ABOUT HERO
+=========================== */
+
+.about-hero{
+
+    background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
+    url("../images/hero.jpeg") center center/cover no-repeat;
+
+    color:white;
+
+    padding:120px 0;
+
+    text-align:center;
+
+}
+
+.hero-badge{
+
+    display:inline-block;
+
+    background:#FFC107;
+
+    color:#111;
+
+    padding:8px 20px;
+
+    border-radius:50px;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+
+}
+
+.about-hero h1{
+
+    font-size:3.6rem;
+
+    font-weight:700;
+
+    margin-bottom:20px;
+
+}
+
+.about-hero p{
+
+    max-width:700px;
+
+    margin:auto;
+
+    color:#ddd;
+
+    line-height:1.8;
+
+    font-size:1.1rem;
+
+}
+
+/* ===========================
+   STORY
+=========================== */
+
+.about-story{
+
+    padding:90px 0;
+
+    background:#fff;
+
+}
+
+.about-story img{
+
+    border-radius:20px;
+
+    transition:.4s;
+
+}
+
+.about-story img:hover{
+
+    transform:scale(1.03);
+
+}
+
+.about-story h2{
+
+    font-size:2.5rem;
+
+    font-weight:700;
+
+    margin-bottom:25px;
+
+}
+
+.about-story p{
+
+    color:#666;
+
+    line-height:1.9;
+
+    font-size:1.05rem;
+
+}
+
+/* ===========================
+   MISSION
+=========================== */
+
+.mission-section{
+
+    background:#f8f9fa;
+
+    padding:90px 0;
+
+}
+
+.mission-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:40px;
+
+    text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+    height:100%;
+
+}
+
+.mission-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.15);
+
+}
+
+.mission-card i{
+
+    font-size:55px;
+
+    color:#FFC107;
+
+    margin-bottom:20px;
+
+    transition:.35s;
+
+}
+
+.mission-card:hover i{
+
+    transform:rotate(360deg);
+
+}
+
+.mission-card h3{
+
+    font-weight:700;
+
+    margin-bottom:15px;
+
+}
+
+.mission-card p{
+
+    color:#666;
+
+    line-height:1.8;
+
+}
+
+/* ===========================
+   STATS
+=========================== */
+
+.stats-section{
+
+    background:#111;
+
+    color:white;
+
+    padding:80px 0;
+
+}
+
+.stats-section h2{
+
+    color:#FFC107;
+
+    font-size:3rem;
+
+    font-weight:700;
+
+}
+
+.stats-section p{
+
+    margin-top:10px;
+
+    color:#ccc;
+
+    font-size:1.1rem;
+
+}
+
+/* ===========================
+   VALUES
+=========================== */
+
+.values-section{
+
+    padding:90px 0;
+
+    background:white;
+
+}
+
+.values-section h2{
+
+    font-size:2.6rem;
+
+    font-weight:700;
+
+}
+
+.value-card{
+
+    background:#f8f9fa;
+
+    border-radius:20px;
+
+    padding:40px;
+
+    text-align:center;
+
+    transition:.35s;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+
+    height:100%;
+
+}
+
+.value-card:hover{
+
+    background:#FFC107;
+
+    color:#111;
+
+    transform:translateY(-10px);
+
+}
+
+.value-card i{
+
+    font-size:50px;
+
+    margin-bottom:20px;
+
+}
+
+.value-card h4{
+
+    font-weight:700;
+
+}
+
+/* ===========================
+   CTA
+=========================== */
+
+.about-cta{
+
+    background:#111;
+
+    color:white;
+
+    padding:100px 0;
+
+    text-align:center;
+
+}
+
+.about-cta h2{
+
+    font-size:2.8rem;
+
+    font-weight:700;
+
+    margin-bottom:20px;
+
+}
+
+.about-cta p{
+
+    color:#ddd;
+
+    margin-bottom:35px;
+
+    font-size:1.1rem;
+
+}
+
+.about-cta .btn{
+
+    border-radius:50px;
+
+    padding:14px 40px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.about-cta .btn:hover{
+
+    transform:translateY(-3px);
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:992px){
+
+.about-hero{
+
+    padding:90px 0;
+
+}
+
+.about-hero h1{
+
+    font-size:2.8rem;
+
+}
+
+.about-story{
+
+    text-align:center;
+
+}
+
+.about-story img{
+
+    margin-bottom:35px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.about-hero h1{
+
+    font-size:2.2rem;
+
+}
+
+.about-story h2{
+
+    font-size:2rem;
+
+}
+
+.stats-section h2{
+
+    font-size:2.3rem;
+
+}
+
+.mission-card,
+
+.value-card{
+
+    padding:30px;
+
+}
+
+.about-cta h2{
+
+    font-size:2rem;
+
+}
+
+}

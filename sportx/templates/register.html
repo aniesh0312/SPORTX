@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Create Account | SPORTX{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<main class="auth-page py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-7">
+
+                <section class="auth-card p-4 p-md-5">
+
+                    <div class="text-center mb-4">
+                        <h1 class="h2 fw-bold mb-2">Create your account</h1>
+                        <p class="text-secondary mb-0">
+                            Join SPORTX and keep your orders in one place.
+                        </p>
+                    </div>
+
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+
+                        <input type="hidden" name="next" value="{{ request.GET.next }}">
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+                                {% include "includes/form_field.html" with field=form.first_name %}
+                            </div>
+
+                            <div class="col-md-6">
+                                {% include "includes/form_field.html" with field=form.last_name %}
+                            </div>
+
+                            <div class="col-12">
+                                {% include "includes/form_field.html" with field=form.username %}
+                            </div>
+
+                            <div class="col-12">
+                                {% include "includes/form_field.html" with field=form.email %}
+                            </div>
+
+                            <div class="col-md-6">
+                                {% include "includes/form_field.html" with field=form.password1 %}
+                            </div>
+
+                            <div class="col-md-6">
+                                {% include "includes/form_field.html" with field=form.password2 %}
+                            </div>
+
+                        </div>
+
+                        <button class="btn btn-dark btn-lg w-100 mt-4" type="submit">
+                            Create Account
+                        </button>
+                    </form>
+
+                    <p class="text-center text-secondary mt-4 mb-0">
+                        Already have an account?
+                        <a class="fw-semibold text-dark" href="{% url 'login' %}">
+                            Log in
+                        </a>
+                    </p>
+
+                </section>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

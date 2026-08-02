@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Checkout | SPORTX{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="checkout-hero">
+    <div class="container">
+        <p class="eyebrow">SPORTX CHECKOUT</p>
+        <h1>Complete your order</h1>
+        <p>Review your items and enter your delivery details.</p>
+    </div>
+</section>
+
+<section class="checkout-section">
+    <div class="container">
+        <form method="post" action="{% url 'place_order' %}">
+            {% csrf_token %}
+
+            <div class="row g-4 g-lg-5">
+                <div class="col-lg-7">
+                    <div class="checkout-panel">
+                        <div class="panel-heading">
+                            <span class="step-number">1</span>
+                            <div>
+                                <h2>Delivery details</h2>
+                                <p>Where should we send your order?</p>
+                            </div>
+                        </div>
+
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+                        {% endif %}
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label for="{{ form.customer_name.id_for_label }}" class="form-label">Full name</label>
+                                {{ form.customer_name }}
+                                <div class="field-error">{{ form.customer_name.errors }}</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="{{ form.email.id_for_label }}" class="form-label">Email address</label>
+                                {{ form.email }}
+                                <div class="field-error">{{ form.email.errors }}</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="{{ form.phone.id_for_label }}" class="form-label">Phone number</label>
+                                {{ form.phone }}
+                                <div class="field-error">{{ form.phone.errors }}</div>
+                            </div>
+                            <div class="col-12">
+                                <label for="{{ form.address.id_for_label }}" class="form-label">Delivery address</label>
+                                {{ form.address }}
+                                <div class="field-error">{{ form.address.errors }}</div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="{{ form.city.id_for_label }}" class="form-label">City</label>
+                                {{ form.city }}
+                                <div class="field-error">{{ form.city.errors }}</div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="{{ form.state.id_for_label }}" class="form-label">State</label>
+                                {{ form.state }}
+                                <div class="field-error">{{ form.state.errors }}</div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="{{ form.pincode.id_for_label }}" class="form-label">Pincode</label>
+                                {{ form.pincode }}
+                                <div class="field-error">{{ form.pincode.errors }}</div>
+                            </div>
+                        </div>
+
+                        <hr class="checkout-divider">
+
+                        <div class="panel-heading mb-3">
+                            <span class="step-number">2</span>
+                            <div>
+                                <h2>Payment method</h2>
+                                <p>Select how you would like to pay.</p>
+                            </div>
+                        </div>
+
+                        <div class="payment-options">
+                            {% for option in form.payment_method %}
+                                <label class="payment-option" for="{{ option.id_for_label }}">
+                                    {{ option.tag }}
+                                    <span>{{ option.choice_label }}</span>
+                                </label>
+                            {% endfor %}
+                        </div>
+                        <div class="field-error">{{ form.payment_method.errors }}</div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <aside class="order-summary">
+                        <h2>Order summary</h2>
+
+                        <div class="summary-items">
+                            {% for item in cart_items %}
+                                <div class="summary-item">
+                                    <div class="summary-image">
+                                        {% if item.product.image %}
+                                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                        {% endif %}
+                                    </div>
+                                    <div class="summary-product">
+                                        <h3>{{ item.product.name }}</h3>
+                                        <p>{{ item.product.brand }} · Qty {{ item.quantity }}</p>
+                                    </div>
+                                    <strong>₹{{ item.subtotal }}</strong>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="summary-line"><span>Subtotal</span><strong>₹{{ total }}</strong></div>
+                        <div class="summary-line"><span>Delivery</span><strong class="free-text">Free</strong></div>
+                        <div class="summary-total"><span>Total</span><strong>₹{{ total }}</strong></div>
+
+                        <button type="submit" class="btn place-order-btn w-100">
+                            <i class="bi bi-lock-fill"></i> Place secure order
+                        </button>
+
+                        <a href="{% url 'cart' %}" class="back-to-cart">
+                            <i class="bi bi-arrow-left"></i> Return to cart
+                        </a>
+                    </aside>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

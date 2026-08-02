@@ -1,0 +1,267 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Contact | SPORTX
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<body>
+  <!-- Contact Section -->
+
+    <section class="contact-hero">
+
+    <div class="container">
+
+        <span class="hero-badge">
+            GET IN TOUCH
+        </span>
+
+        <h1>
+            We'd Love to Hear From You
+        </h1>
+
+        <p>
+            Whether you have a question about products, orders or support,
+            our team is ready to help.
+        </p>
+
+    </div>
+
+</section>
+
+
+ <section class="contact-info py-5">
+
+<div class="container">
+
+<div class="row g-4">
+
+<div class="col-lg-4">
+
+<div class="contact-card">
+
+<div class="contact-icon">
+
+<i class="bi bi-telephone-fill"></i>
+
+</div>
+
+<h4>Call Us</h4>
+
+<p>+91 98765 43210</p>
+
+<span>Mon - Sat | 9 AM - 7 PM</span>
+
+</div>
+
+</div>
+
+<div class="col-lg-4">
+
+<div class="contact-card">
+
+<div class="contact-icon">
+
+<i class="bi bi-envelope-fill"></i>
+
+</div>
+
+<h4>Email Us</h4>
+
+<p>support@sportx.com</p>
+
+<span>We'll reply within 24 hours</span>
+
+</div>
+
+</div>
+
+<div class="col-lg-4">
+
+<div class="contact-card">
+
+<div class="contact-icon">
+
+<i class="bi bi-geo-alt-fill"></i>
+
+</div>
+
+<h4>Visit Us</h4>
+
+<p>VIT University</p>
+
+<span>Vellore, Tamil Nadu</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="contact-form-section py-5">
+
+<div class="container">
+
+<div class="row g-5">
+
+<div class="col-lg-7">
+
+<div class="contact-form-box">
+
+<h2>Send us a Message</h2>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+
+<input
+type="text"
+class="form-control"
+placeholder="Your Name"
+required>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<input
+type="email"
+class="form-control"
+placeholder="Your Email"
+required>
+
+</div>
+
+</div>
+
+<div class="mb-3">
+
+<input
+type="text"
+class="form-control"
+placeholder="Subject"
+required>
+
+</div>
+
+<div class="mb-4">
+
+<textarea
+class="form-control"
+rows="6"
+placeholder="Write your message..."
+required></textarea>
+
+</div>
+
+<button class="btn btn-warning btn-lg">
+
+<i class="bi bi-send-fill"></i>
+
+Send Message
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<div class="col-lg-5">
+
+<div class="hours-card">
+
+<h3>
+
+Business Hours
+
+</h3>
+
+<div class="hour-row">
+
+<span>Monday - Friday</span>
+
+<strong>9:00 AM - 7:00 PM</strong>
+
+</div>
+
+<div class="hour-row">
+
+<span>Saturday</span>
+
+<strong>10:00 AM - 5:00 PM</strong>
+
+</div>
+
+<div class="hour-row">
+
+<span>Sunday</span>
+
+<strong>Closed</strong>
+
+</div>
+
+<hr>
+
+<h5>
+
+Follow Us
+
+</h5>
+
+<div class="social-links">
+
+<a href="#"><i class="bi bi-instagram"></i></a>
+
+<a href="#"><i class="bi bi-facebook"></i></a>
+
+<a href="#"><i class="bi bi-linkedin"></i></a>
+
+<a href="#"><i class="bi bi-twitter-x"></i></a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="map-section">
+
+<iframe
+src="https://www.google.com/maps?q=VIT%20Vellore&output=embed"
+loading="lazy"
+allowfullscreen>
+</iframe>
+
+</section>
+
+   
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+{% endblock %}
