@@ -81,16 +81,23 @@ WSGI_APPLICATION = 'sportstore.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sportx_db',
-        'USER': 'root',
-        'PASSWORD': 'aniesh0312',
-        'HOST': 'localhost',
-        'PORT': '3306',
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if DATABASE_URL:
+    DATABASES = {
+        "default": dj_database_url.parse(DATABASE_URL, conn_max_age=600)
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.mysql",
+            "NAME": "sportx_db",
+            "USER": "root",
+            "PASSWORD": "aniesh0312",
+            "HOST": "localhost",
+            "PORT": "3306",
+        }
+    }
 
 
 # Password validation
